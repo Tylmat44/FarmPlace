@@ -1,0 +1,20 @@
+{
+  "NONE": {
+    "name": "none",
+    "cost": "0",
+    "type": "crafting",
+    "slots": "0",
+    "size_x": "0",
+    "size_y": "0",
+    "crafting_types": "food?alcohol"
+  },
+  "BASIC_HOUSE": {
+    "name": "Basic House",
+    "cost": "1000",
+    "type": "crafting",
+    "slots": "4",
+    "size_x": "6",
+    "size_y": "4",
+    "crafting_types": "food?alcohol"
+  }
+}

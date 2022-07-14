@@ -1,0 +1,65 @@
+{
+  "NONE": {
+    "name": "none",
+    "cost": "0",
+    "growth_time": "0",
+    "harvest_quantity": "0",
+    "resource": "NONE",
+    "xp": "0",
+    "level": "0"
+  },
+  "WHEAT": {
+    "name": "Wheat",
+    "cost": "5",
+    "growth_time": ".5",
+    "harvest_quantity": "5",
+    "resource": "WHEAT",
+    "xp": "5",
+    "level": "0"
+  },
+  "ONIONS": {
+    "name": "Onions",
+    "cost": "10",
+    "growth_time": "1",
+    "harvest_quantity": "5",
+    "resource": "ONIONS",
+    "xp": "10",
+    "level": "10"
+  },
+  "CARROTS": {
+    "name": "CARROTS",
+    "cost": "20",
+    "growth_time": "2",
+    "harvest_quantity": "5",
+    "resource": "CARROTS",
+    "xp": "20",
+    "level": "20"
+  },
+  "POTATOES": {
+    "name": "Potatoes",
+    "cost": "40",
+    "growth_time": "5",
+    "harvest_quantity": "10",
+    "resource": "POTATOES",
+    "xp": "50",
+    "level": "30"
+  },
+  "TOMATOES": {
+    "name": "Tomatoes",
+    "cost": "40",
+    "growth_time": "7",
+    "harvest_quantity": "5",
+    "resource": "TOMATOES",
+    "xp": "100",
+    "level": "40"
+  },
+  "CORN": {
+    "name": "Corn",
+    "cost": "100",
+    "growth_time": "10",
+    "harvest_quantity": "10",
+    "resource": "CORN",
+    "xp": "200",
+    "level": "50"
+  }
+}

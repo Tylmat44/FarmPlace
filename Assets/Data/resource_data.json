@@ -1,0 +1,136 @@
+{
+  "NONE": {
+    "name": "none",
+    "sell_price": "0",
+    "buy_price": "0",
+    "type": "resource",
+    "source": ""
+  },
+  "WHEAT": {
+    "name": "Wheat",
+    "buy_price": "0",
+    "sell_price": "2",
+    "type": "resource",
+    "source": ""
+  },
+  "MILK": {
+    "name": "Milk",
+    "buy_price": "0",
+    "sell_price": "7",
+    "type": "resource",
+    "source": ""
+  },
+  "WHEAT_SEEDS": {
+    "name": "Wheat Seeds",
+    "buy_price": "5",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "WHEAT"
+  },
+  "CALF": {
+    "name": "Calf",
+    "buy_price": "100",
+    "sell_price": "50",
+    "type": "baby",
+    "source": "CALF"
+  },
+  "COW": {
+    "name": "Cow",
+    "buy_price": "100",
+    "sell_price": "200",
+    "type": "animal",
+    "source": "COW"
+  },
+  "ONION_SEEDS": {
+    "name": "Onion Seeds",
+    "buy_price": "10",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "ONIONS"
+  },
+  "CARROT_SEEDS": {
+    "name": "Carrot Seeds",
+    "buy_price": "20",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "CARROTS"
+  },
+  "POTATO_SEEDS": {
+    "name": "Potato Seeds",
+    "buy_price": "40",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "POTATOES"
+  },
+  "TOMATO_SEEDS": {
+    "name": "Tomato Seeds",
+    "buy_price": "40",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "TOMATOES"
+  },
+  "CORN_SEEDS": {
+    "name": "Corn Seeds",
+    "buy_price": "100",
+    "sell_price": "0",
+    "type": "seed",
+    "source": "CORN"
+  },
+  "ONIONS": {
+    "name": "Onions",
+    "buy_price": "0",
+    "sell_price": "8",
+    "type": "resource",
+    "source": ""
+  },
+  "CARROTS": {
+    "name": "Carrots",
+    "buy_price": "0",
+    "sell_price": "10",
+    "type": "resource",
+    "source": ""
+  },
+  "POTATOES": {
+    "name": "Potaties",
+    "buy_price": "0",
+    "sell_price": "7",
+    "type": "resource",
+    "source": ""
+  },
+  "TOMATOES": {
+    "name": "Tomatoes",
+    "buy_price": "0",
+    "sell_price": "15",
+    "type": "resource",
+    "source": ""
+  },
+  "CORN": {
+    "name": "Corn",
+    "buy_price": "0",
+    "sell_price": "10",
+    "type": "resource",
+    "source": ""
+  },
+  "BASIC_HOUSE": {
+    "name": "Basic House",
+    "buy_price": "1000",
+    "sell_price": "0",
+    "type": "useableBuilding",
+    "source": ""
+  },
+  "BASIC_OVEN": {
+    "name": "Basic Oven",
+    "buy_price": "1000",
+    "sell_price": "0",
+    "type": "crafting_station_food",
+    "source": ""
+  },
+  "UPGRADED_OVEN": {
+    "name": "Upgraded Oven",
+    "buy_price": "10000",
+    "sell_price": "0",
+    "type": "crafting_station_food",
+    "source": ""
+  }
+  
+}

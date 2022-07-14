@@ -1,0 +1,22 @@
+{
+  "NONE": {
+    "name": "none",
+    "sell_price": "0",
+    "crafting_type": "food",
+    "quantity_produced": "0",
+    "crafting_time": "0",
+    "recipie": "",
+    "xp": "0",
+    "level": "0"
+  },
+  "BREAD": {
+    "name": "Bread",
+    "sell_price": "20",
+    "crafting_type": "food",
+    "quantity_produced": "1",
+    "crafting_time": "90",
+    "recipie": "WHEAT!5",
+    "xp": "20",
+    "level": "1"
+  }
+}

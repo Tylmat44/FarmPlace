@@ -1,0 +1,4 @@
+repository "FarmPlace@FoxStudios@cloud"
+  path "/"
+    br "/main"
+    co "/main"

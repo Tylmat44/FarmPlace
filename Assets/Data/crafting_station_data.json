@@ -1,0 +1,20 @@
+{
+  "NONE": {
+    "name": "None",
+    "cost": "0",
+    "crafting_type": "food",
+    "speed_multiplier": "1"
+  },
+  "BASIC_OVEN": {
+    "name": "Basic Oven",
+    "cost": "1000",
+    "crafting_type": "food",
+    "speed_multiplier": "1"
+  },
+  "UPGRADED_OVEN": {
+    "name": "Upgraded Oven",
+    "cost": "10000",
+    "crafting_type": "food",
+    "speed_multiplier": "1.2"
+  }
+}

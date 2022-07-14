@@ -1,0 +1,41 @@
+{
+  "NONE": {
+    "name": "none",
+    "cost": "0",
+    "growth_time": "0",
+    "harvest_time": "0",
+    "base_sell_price": "0",
+    "harvest_quantity": "0",
+    "resource": "MILK",
+    "slots": "0",
+    "xp": "0",
+    "size_x": "0",
+    "size_y": "0"
+  },
+  "COW": {
+    "name": "Cow",
+    "cost": "100",
+    "growth_time": "0",
+    "harvest_time": "5",
+    "base_sell_price": "200",
+    "harvest_quantity": "1",
+    "resource": "MILK",
+    "slots": "2",
+    "xp": "25",
+    "size_x": "1",
+    "size_y": "2"
+  },
+  "CALF": {
+    "name": "Calf",
+    "cost": "100",
+    "growth_time": "10",
+    "harvest_time": "0",
+    "base_sell_price": "50",
+    "harvest_quantity": "0",
+    "resource": "COW",
+    "slots": "2",
+    "xp": "0",
+    "size_x": "1",
+    "size_y": "2"
+  }
+}
