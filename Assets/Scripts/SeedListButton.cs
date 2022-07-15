@@ -52,7 +52,7 @@ public class SeedListButton : MonoBehaviour
             }
         } else
         {
-            if (DataManager.craftingStationDB[seedKey].Copy().Cost > AccountManager.Coins)
+            if (DataManager.craftingStationDB[seedKey].Copy().Cost < AccountManager.Coins)
             {
                 StartCoroutine(craftingStationDialogue(DataManager.craftingStationDB[seedKey].Copy(), this.slot));
             }
