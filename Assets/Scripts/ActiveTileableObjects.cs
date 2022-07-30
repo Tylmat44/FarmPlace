@@ -44,6 +44,18 @@ public static class ActiveTileableObjects
                 newObj.Parse(results[2]);
                 tempList.Add(newObj);
             }
+            else if (tempType == TileableObjectType.useableBuilding)
+            {
+                UseableBuilding newObj = DataManager.useableBuildingDB[results[0]].Copy();
+                newObj.Parse(results[2]);
+                tempList.Add(newObj);
+            }
+            else if (tempType == TileableObjectType.decor)
+            {
+                Decor newObj = DataManager.decorDB[results[0]].Copy();
+                newObj.Parse(results[2]);
+                tempList.Add(newObj);
+            }
         }
         DataManager.DatabaseConnection.Close();
 
@@ -55,6 +67,14 @@ public static class ActiveTileableObjects
             } else if (tileableObject.Type == TileableObjectType.animal)
             {
                 TileManager.map[(int)((Animal)tileableObject).TileGroup[0].x][(int)((Animal)tileableObject).TileGroup[0].y].addTileableObject(tileableObject);
+            }
+            else if (tileableObject.Type == TileableObjectType.useableBuilding)
+            {
+                TileManager.map[(int)((UseableBuilding)tileableObject).TileGroup[0].x][(int)((UseableBuilding)tileableObject).TileGroup[0].y].addTileableObject(tileableObject);
+            }
+            else if (tileableObject.Type == TileableObjectType.decor)
+            {
+                TileManager.map[(int)((Decor)tileableObject).TileGroup[0].x][(int)((Decor)tileableObject).TileGroup[0].y].addTileableObject(tileableObject);
             }
         }
     }

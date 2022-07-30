@@ -38,7 +38,7 @@ public class UseableBuildingObject : MonoBehaviour
 
                     if(craftingStation.QuantityLeft <= 0)
                     {
-                        craftingStation.IsCrafting = false;
+                        craftingStation.endCrafting();
                     } else
                     {
                         craftingStation.TimeLeft = TimeSpan.FromMinutes(craftingStation.CraftableResource.CraftingTime.TotalMinutes / craftingStation.SpeedMultiplier);

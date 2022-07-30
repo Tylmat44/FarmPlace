@@ -26,7 +26,7 @@ public static class Inventory
         while (rdr.Read())
         {
             string[] results = EncryptedXmlSerializer.DecryptData(rdr.GetString(1)).Split(',');
-            inventory.Add(results[0], int.Parse(results[1]));
+            Inventory.addItem(results[0], int.Parse(results[1]));
         }
         DataManager.DatabaseConnection.Close();
 
@@ -101,7 +101,7 @@ public static class Inventory
         {
             if (inventory.ContainsKey(key))
             {
-                craftingValues.Add(recipie[key] / inventory[key]); 
+                craftingValues.Add(inventory[key] / recipie[key]); 
             } else
             {
                 canCraft = false;
@@ -115,6 +115,18 @@ public static class Inventory
         {
             craftingValues.Sort();
             return craftingValues[0];
+        }
+    }
+
+    public static int getItemAmount(string resource)
+    {
+        if (inventory.ContainsKey(resource))
+        {
+            return inventory[resource];
+        }
+        else
+        {
+            return 0;
         }
     }
 }

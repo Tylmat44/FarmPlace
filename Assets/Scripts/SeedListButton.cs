@@ -50,6 +50,11 @@ public class SeedListButton : MonoBehaviour
                 ToolChest.UseableBuildingSelected = DataManager.useableBuildingDB[seedKey];
                 selectedText.text = DataManager.useableBuildingDB[seedKey].Name;
             }
+            else if (FarmScene.catalogTypeOpen == TileableObjectType.decor)
+            {
+                ToolChest.DecorSelected = DataManager.decorDB[seedKey];
+                selectedText.text = DataManager.decorDB[seedKey].Name;
+            }
         } else
         {
             if (DataManager.craftingStationDB[seedKey].Copy().Cost < AccountManager.Coins)
@@ -62,9 +67,15 @@ public class SeedListButton : MonoBehaviour
 
     public IEnumerator craftingStationDialogue(CraftingStation craftingStation, int slot)
     {
-        CraftingStationConfirmationBox._instance.Name = craftingStation.Name;
+        if (this.UseableBuilding.CraftingStations[slot].Key != "NONE")
+        {
+            CraftingStationConfirmationBox._instance.Name = this.UseableBuilding.CraftingStations[slot].Name;
 
-        yield return StartCoroutine(CraftingStationConfirmationBox._instance.Dialog());
+            yield return StartCoroutine(CraftingStationConfirmationBox._instance.Dialog());
+        } else
+        {
+            CraftingStationConfirmationBox.selection = true;
+        }
 
         if (CraftingStationConfirmationBox.selection)
         {

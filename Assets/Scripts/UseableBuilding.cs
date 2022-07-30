@@ -54,10 +54,12 @@ public class UseableBuilding : TileableObjects
                 builder.Append(this.craftingStations[key].QuantityLeft);
                 builder.Append("!");
                 builder.Append(this.craftingStations[key].TimeLeft.TotalMinutes);
+                builder.Append("+");
 
             } else
             {
                 builder.Append("!false");
+                builder.Append("+");
             }
         }
 
@@ -84,17 +86,20 @@ public class UseableBuilding : TileableObjects
 
         if(int.Parse(dataList[3]) > 0)
         {
-            string[] craftingStationList = dataList[4].Split('!');
-            for (int i = 0; i < int.Parse(dataList[3]); i++)
+            string[] craftingStationList = dataList[4].Split('+');
+            Debug.Log(int.Parse(dataList[3]));
+            for (int i = 1; i <= int.Parse(dataList[3]); i++)
             {
-                this.CraftingStations.Add(i, DataManager.craftingStationDB[craftingStationList[0]].Copy());
+                Debug.Log(craftingStationList[i-1]);
+                string[] craftingStationInfo = craftingStationList[i-1].Split('!');
+                this.CraftingStations[i] = DataManager.craftingStationDB[craftingStationInfo[0]].Copy();
 
-                if(craftingStationList[1] == "true")
+                if(craftingStationInfo[1] == "true")
                 {
                     this.CraftingStations[i].IsCrafting = true;
-                    this.CraftingStations[i].CraftableResource = DataManager.craftableResourceDB[craftingStationList[2]].Copy();
-                    this.CraftingStations[i].QuantityLeft = int.Parse(craftingStationList[3]);
-                    this.CraftingStations[i].TimeLeft = TimeSpan.FromMinutes(double.Parse(craftingStationList[4]));
+                    this.CraftingStations[i].CraftableResource = DataManager.craftableResourceDB[craftingStationInfo[2]].Copy();
+                    this.CraftingStations[i].QuantityLeft = int.Parse(craftingStationInfo[3]);
+                    this.CraftingStations[i].TimeLeft = TimeSpan.FromMinutes(double.Parse(craftingStationInfo[4]));
 
                     double minutesSinceLastLogin = (DateTime.UtcNow - AccountManager.LastLogin).TotalMinutes;
                     int totalProduced = 0;
@@ -139,6 +144,7 @@ public class UseableBuilding : TileableObjects
             {
                 AccountManager.Coins -= craftingStation.Cost;
                 this.CraftingStations[slot] = craftingStation;
+                BuildingMenuPopup._instance.refreshMenu();
             }
         }
     }

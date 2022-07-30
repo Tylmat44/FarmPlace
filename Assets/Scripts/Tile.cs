@@ -122,11 +122,48 @@ public class Tile : MonoBehaviour
             }
 
         }
+
+        if (ToolChest.DecorSelected != null)
+        {
+            int x;
+            int y;
+            if (ToolChest.DecorSelected.Rotation == 0 || ToolChest.DecorSelected.Rotation == 180)
+            {
+                x = (int)ToolChest.DecorSelected.Size.x;
+                y = (int)ToolChest.DecorSelected.Size.y;
+            }
+            else
+            {
+                x = (int)ToolChest.DecorSelected.Size.y;
+                y = (int)ToolChest.DecorSelected.Size.x;
+            }
+
+            Dictionary<int, Vector2> group = this.calculateTileGroup(x, y);
+            bool isOccupied = false;
+
+            foreach (Vector2 tile in group.Values)
+            {
+                if (TileManager.map[(int)tile.x][(int)tile.y].hasObject)
+                {
+                    isOccupied = true;
+                }
+            }
+            if (!isOccupied)
+            {
+                if (AccountManager.Coins >= DataManager.decorDB[ToolChest.DecorSelected.Key].Cost)
+                {
+                    addTileableObject(DataManager.decorDB[ToolChest.DecorSelected.Key].Copy());
+                    AccountManager.Coins -= DataManager.decorDB[ToolChest.DecorSelected.Key].Cost;
+                }
+            }
+
+        }
+
     }
 
     void OnMouseEnter()
     {
-        if (ToolChest.PlowSelected || ToolChest.ClearSelected || ToolChest.SeedSelected != null || ToolChest.AnimalSelected != null || ToolChest.UseableBuildingSelected != null)
+        if (ToolChest.PlowSelected || ToolChest.ClearSelected || ToolChest.SeedSelected != null || ToolChest.AnimalSelected != null || ToolChest.UseableBuildingSelected != null || ToolChest.DecorSelected != null)
         {
             if (ToolChest.AnimalSelected != null)
             {
@@ -137,6 +174,13 @@ public class Tile : MonoBehaviour
             } else if (ToolChest.UseableBuildingSelected != null)
             {
                 foreach (Vector2 tile in this.calculateTileGroup((int)ToolChest.UseableBuildingSelected.Size.x, (int)ToolChest.UseableBuildingSelected.Size.y).Values)
+                {
+                    TileManager.map[(int)tile.x][(int)tile.y].gameObject.GetComponent<Outline>().enabled = true;
+                }
+            }
+            else if (ToolChest.DecorSelected != null)
+            {
+                foreach (Vector2 tile in this.calculateTileGroup((int)ToolChest.DecorSelected.Size.x, (int)ToolChest.DecorSelected.Size.y).Values)
                 {
                     TileManager.map[(int)tile.x][(int)tile.y].gameObject.GetComponent<Outline>().enabled = true;
                 }
@@ -157,7 +201,7 @@ public class Tile : MonoBehaviour
     void OnMouseExit()
 
     {
-        if (ToolChest.PlowSelected || ToolChest.ClearSelected || ToolChest.SeedSelected != null || ToolChest.AnimalSelected != null || ToolChest.UseableBuildingSelected != null)
+        if (ToolChest.PlowSelected || ToolChest.ClearSelected || ToolChest.SeedSelected != null || ToolChest.AnimalSelected != null || ToolChest.UseableBuildingSelected != null || ToolChest.DecorSelected != null)
         {
             if (ToolChest.AnimalSelected != null)
             {
@@ -169,6 +213,13 @@ public class Tile : MonoBehaviour
             else if (ToolChest.UseableBuildingSelected != null)
             {
                 foreach (Vector2 tile in this.calculateTileGroup((int)ToolChest.UseableBuildingSelected.Size.x, (int)ToolChest.UseableBuildingSelected.Size.y).Values)
+                {
+                    TileManager.map[(int)tile.x][(int)tile.y].gameObject.GetComponent<Outline>().enabled = false;
+                }
+            }
+            else if (ToolChest.DecorSelected != null)
+            {
+                foreach (Vector2 tile in this.calculateTileGroup((int)ToolChest.DecorSelected.Size.x, (int)ToolChest.DecorSelected.Size.y).Values)
                 {
                     TileManager.map[(int)tile.x][(int)tile.y].gameObject.GetComponent<Outline>().enabled = false;
                 }
@@ -196,6 +247,10 @@ public class Tile : MonoBehaviour
         } else if (addObject.Type == TileableObjectType.useableBuilding)
         {
             group = this.calculateTileGroup((int)((UseableBuilding)addObject).Size.x, (int)((UseableBuilding)addObject).Size.y);
+        }
+        else if (addObject.Type == TileableObjectType.decor)
+        {
+            group = this.calculateTileGroup((int)((Decor)addObject).Size.x, (int)((Decor)addObject).Size.y);
         }
 
         bool objectInPlace = false;
@@ -235,6 +290,14 @@ public class Tile : MonoBehaviour
                 gameObjectSlot.GetComponent<UseableBuildingObject>().TileGroup = group;
                 gameObjectSlot.GetComponent<UseableBuildingObject>().UseableBuilding.TileGroup = group;
                 ActiveTileableObjects.activeTileableObjects.Add(gameObjectSlot.GetComponent<UseableBuildingObject>().UseableBuilding);
+            }
+            else if (addObject.Type == TileableObjectType.decor)
+            {
+                GameObject gameObjectSlot = Instantiate(DataManager.prefabDB[addObject.Key], TileManager.map[(int)group[0].x][(int)group[0].y].gameObject.transform.position, Quaternion.identity, (TileManager.map[(int)group[0].x][(int)group[0].y]).transform);
+                gameObjectSlot.GetComponent<DecorObject>().Decor = (Decor)addObject;
+                gameObjectSlot.GetComponent<DecorObject>().TileGroup = group;
+                gameObjectSlot.GetComponent<DecorObject>().Decor.TileGroup = group;
+                ActiveTileableObjects.activeTileableObjects.Add(gameObjectSlot.GetComponent<DecorObject>().Decor);
             }
 
         }

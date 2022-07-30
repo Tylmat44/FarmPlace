@@ -131,6 +131,20 @@
     "sell_price": "0",
     "type": "crafting_station_food",
     "source": ""
+  },
+  "BREAD": {
+    "name": "Bread",
+    "buy_price": "0",
+    "sell_price": "20",
+    "type": "food",
+    "source": ""
+  },
+  "HAYBALE": {
+    "name": "Haybale",
+    "buy_price": "10",
+    "sell_price": "5",
+    "type": "decor",
+    "source": ""
   }
   
 }

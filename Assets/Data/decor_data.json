@@ -1,0 +1,14 @@
+{
+  "NONE": {
+    "name": "none",
+    "cost": "0",
+    "size_x": "0",
+    "size_y": "0"
+  },
+  "HAYBALE": {
+    "name": "Haybale",
+    "cost": "10",
+    "size_x": "1",
+    "size_y": "1"
+  }
+}

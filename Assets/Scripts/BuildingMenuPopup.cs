@@ -70,6 +70,11 @@ public class BuildingMenuPopup : MonoBehaviour, IPointerEnterHandler, IPointerEx
             station.transform.SetParent(craftingStationTemplate.transform.parent, false);
             this.craftingStationObjects.Add(station);
             count++;
+
+            if(this.useableBuilding.CraftingStations[craftingStation].IsCrafting)
+            {
+                station.GetComponent<CraftingStationObjectTemplate>().setCraftableResource(this.useableBuilding.CraftingStations[craftingStation].CraftableResource);
+            }
         }
 
 
@@ -90,5 +95,45 @@ public class BuildingMenuPopup : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void hidePopup()
     {
         this.gameObject.SetActive(false);
+        RecipieHover._instance.hidePopup();
+        foreach (GameObject gameObject in CraftingStationObjectTemplate.recipieButtons)
+        {
+            Destroy(gameObject);
+        }
+        AlwaysRunning.allowHover = true;
+    }
+
+    public void refreshMenu()
+    {
+        foreach (GameObject gameObject in this.craftingStationObjects)
+        {
+            Destroy(gameObject);
+        }
+
+        this.craftingStationObjects = new List<GameObject>();
+
+        int count = 1;
+        foreach (int craftingStation in this.useableBuilding.CraftingStations.Keys)
+        {
+            GameObject station = Instantiate(craftingStationTemplate);
+            station.SetActive(true);
+
+            station.GetComponent<CraftingStationObjectTemplate>().setCraftingStation(this.useableBuilding.CraftingStations[craftingStation], count, this.useableBuilding);
+            station.transform.SetParent(craftingStationTemplate.transform.parent, false);
+            this.craftingStationObjects.Add(station);
+            count++;
+        }
+
+
+        while (count <= this.useableBuilding.Slots)
+        {
+            GameObject station = Instantiate(craftingStationTemplate);
+            station.GetComponent<CraftingStationObjectTemplate>().UseableBuilding = this.useableBuilding;
+            station.GetComponent<CraftingStationObjectTemplate>().Slot = count;
+            station.SetActive(true);
+            station.transform.SetParent(craftingStationTemplate.transform.parent, false);
+            this.craftingStationObjects.Add(station);
+            count++;
+        }
     }
 }

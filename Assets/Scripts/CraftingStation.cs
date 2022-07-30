@@ -41,20 +41,105 @@ public class CraftingStation
         return new CraftingStation(this.Key, this.Name, this.Type, this.SpeedMultiplier, this.Cost);
     }
 
-    public bool startCrafting(CraftableResource craftableResource, int quantity)
+    public int startCrafting(CraftableResource craftableResource, int quantity)
     {
         int maxCraftable = Inventory.checkMaxCraftingAmount(craftableResource.Recipie);
+        int makeQuantity = 0;
 
-        if(maxCraftable <= 0 || maxCraftable < quantity || craftableResource.Type != this.Type)
+        if(maxCraftable <= 0 || craftableResource.Type != this.Type)
         {
-            return false;
+            return 0;
         } else
         {
+            if(maxCraftable < quantity)
+            {
+                makeQuantity = maxCraftable;
+            } else
+            {
+                makeQuantity = quantity;
+            }
+
+            foreach(string key in craftableResource.Recipie.Keys)
+            {
+                Inventory.removeItem(key, craftableResource.Recipie[key] * makeQuantity);
+            }
+
             this.IsCrafting = true;
             this.CraftableResource = craftableResource;
-            this.QuantityLeft = quantity;
+            this.QuantityLeft = makeQuantity;
             this.TimeLeft = TimeSpan.FromMinutes(this.CraftableResource.CraftingTime.TotalMinutes / this.SpeedMultiplier);
-            return true;
+            return makeQuantity;
         }
+    }
+
+    public void refundResources(int quantity)
+    {
+        int refund = 0;
+        if(!this.IsCrafting)
+        {
+            return;
+        }
+
+        if (quantity >= this.QuantityLeft)
+        {
+            refund = this.QuantityLeft;
+        } else
+        {
+            refund = quantity;
+            this.QuantityLeft -= refund;
+        }
+
+        foreach(string key in this.CraftableResource.Recipie.Keys)
+        {
+            Inventory.addItem(key, this.CraftableResource.Recipie[key] * refund);
+        }
+
+        if (quantity >= this.QuantityLeft)
+        {
+            this.QuantityLeft = 0;
+            this.endCrafting();
+        }
+
+
+
+    }
+
+    public void increaseQuantity(int quantity)
+    {
+        if (this.IsCrafting)
+        {
+            int maxCraftable = Inventory.checkMaxCraftingAmount(this.CraftableResource.Recipie);
+            int makeQuantity = 0;
+
+            if (maxCraftable <= 0)
+            {
+                return;
+            }
+            else
+            {
+                if (maxCraftable < quantity)
+                {
+                    makeQuantity = maxCraftable;
+                }
+                else
+                {
+                    makeQuantity = quantity;
+                }
+
+            }
+
+            foreach (string key in craftableResource.Recipie.Keys)
+            {
+                Inventory.removeItem(key, craftableResource.Recipie[key] * makeQuantity);
+            }
+
+            this.QuantityLeft += makeQuantity;
+        }
+    }
+
+    public void endCrafting()
+    {
+        this.IsCrafting = false;
+        this.CraftableResource = null;
     }
 }

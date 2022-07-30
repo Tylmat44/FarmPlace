@@ -15,6 +15,7 @@ public static class DataManager
     public static Dictionary<string, UseableBuilding> useableBuildingDB = new Dictionary<string, UseableBuilding>();
     public static Dictionary<string, CraftingStation> craftingStationDB = new Dictionary<string, CraftingStation>();
     public static Dictionary<string, CraftableResource> craftableResourceDB  = new Dictionary<string, CraftableResource>();
+    public static Dictionary<string, Decor> decorDB = new Dictionary<string, Decor>();
     public static TileableObjects fill = new TileableObjects("FILL", "fill", TileableObjectType.fill, new Dictionary<int, Vector2>(), 0);
     public static List<double> xpTable = new List<double>();
     public static int MAP_SIZE = 20;
@@ -31,6 +32,7 @@ public static class DataManager
         loadCraftableResources();
         loadCraftingStations();
         loadUseableBuildings();
+        loadDecor();
 
         xpTable.Add(0);
 
@@ -162,6 +164,23 @@ public static class DataManager
 
             var value = item.Value;
             craftableResourceDB.Add(item.Name, new CraftableResource((string)item.Name, (string)value.name, getCraftingTypeFromString((string)value.crafting_type), (int)value.quantity_produced, TimeSpan.FromMinutes((double)value.crafting_time), CraftableResource.getRecipieFromString((string)value.recipie), (int)value.xp, (int)value.level));
+        }
+    }
+
+    public static void loadDecor()
+    {
+        string json = "";
+        using (StreamReader r = new StreamReader("Assets\\Data\\decor_data.json"))
+        {
+            json = r.ReadToEnd();
+        }
+
+        dynamic array = JsonConvert.DeserializeObject(json);
+        foreach (var item in array)
+        {
+
+            var value = item.Value;
+            decorDB.Add(item.Name, new Decor((string)item.Name, (string)value.name, (int)value.cost, new Vector2((float)value.size_x, (float)value.size_y)));
         }
     }
 

@@ -139,6 +139,20 @@ public class FarmScene : MonoBehaviour
                 }
                 catalogTypeOpen = TileableObjectType.useableBuilding;
                 break;
+            case 3:
+                foreach (string decor in DataManager.getListOfResourceType(ResourceType.decor))
+                {
+                    GameObject button = Instantiate(buttonTemplate);
+                    button.SetActive(true);
+
+                    button.GetComponent<SeedListButton>().seedText.text = DataManager.resourceDB[decor].Name;
+                    button.GetComponent<SeedListButton>().seedCount.text = DataManager.resourceDB[decor].BuyPrice.ToString();
+                    button.GetComponent<SeedListButton>().SeedKey = decor;
+                    button.transform.SetParent(buttonTemplate.transform.parent, false);
+                    catalogButtons.Add(button);
+                }
+                catalogTypeOpen = TileableObjectType.decor;
+                break;
             default:
                 break;
         }
