@@ -29,4 +29,10 @@ public class WeeklyRequest
         this.XpAward = xpAward;
         this.SpecialRequest = specialRequest;
     }
+
+    public void completeRequest()
+    {
+        AccountManager.Coins += this.XpAward;
+        AccountManager.Coins;
+    }
 }
