@@ -32,7 +32,37 @@ public class WeeklyRequest
 
     public void completeRequest()
     {
-        AccountManager.Coins += this.XpAward;
-        AccountManager.Coins;
+        if (!this.SpecialRequest)
+        {
+            if (Inventory.getItemAmount(this.Resource.Key) >= this.Quantity)
+            {
+                AccountManager.Xp += this.XpAward;
+                AccountManager.Coins += this.CoinReward;
+                Inventory.removeItem(this.Resource.Key, this.Quantity);
+            }
+        } else
+        {
+            bool complete = true;
+
+            foreach(Resource resource in this.SpecialRequests.Keys)
+            {
+                if (Inventory.getItemAmount(resource.Key) < this.SpecialRequests[resource])
+                {
+                    complete = false;
+                }
+            }
+
+            if (complete)
+            {
+                AccountManager.Xp += this.XpAward;
+                AccountManager.Coins += this.CoinReward;
+                Inventory.removeItem(this.Resource.Key, this.Quantity);
+
+                foreach (Resource resource in this.SpecialRequests.Keys)
+                {
+                    Inventory.removeItem(resource.Key, this.SpecialRequests[resource]);
+                }
+            }
+        }
     }
 }
